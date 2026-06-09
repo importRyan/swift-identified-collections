@@ -1,9 +1,10 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.3
 
 import PackageDescription
 
 let package = Package(
   name: "swift-identified-collections",
+  platforms: [.iOS(.v15), .watchOS(.v9), .tvOS(.v15), .macOS(.v12), .visionOS(.v26)],
   products: [
     .library(
       name: "IdentifiedCollections",
@@ -11,25 +12,13 @@ let package = Package(
     )
   ],
   dependencies: [
-    .package(url: "https://github.com/apple/swift-collections", from: "1.0.2"),
-    .package(url: "https://github.com/apple/swift-collections-benchmark", from: "0.0.2"),
+    .package(url: "https://github.com/importRyan/swift-collections", revision: "b166474a4e5053f8d382c95e97de8c237944fcba"),
   ],
   targets: [
     .target(
       name: "IdentifiedCollections",
       dependencies: [
         .product(name: "OrderedCollections", package: "swift-collections")
-      ]
-    ),
-    .testTarget(
-      name: "IdentifiedCollectionsTests",
-      dependencies: ["IdentifiedCollections"]
-    ),
-    .executableTarget(
-      name: "swift-identified-collections-benchmark",
-      dependencies: [
-        "IdentifiedCollections",
-        .product(name: "CollectionsBenchmark", package: "swift-collections-benchmark"),
       ]
     ),
   ],
